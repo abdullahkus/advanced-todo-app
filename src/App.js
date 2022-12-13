@@ -1,8 +1,12 @@
-function App() {
+// Styles
+import { GlobalStyle } from './styles/Global.styles'
+
+const App = () => {
   return (
-    <div>
+    <>
+      <GlobalStyle />
       hello
-    </div>
+    </>
   );
 }
 
