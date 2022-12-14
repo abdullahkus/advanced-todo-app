@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 // Components
 import App from './App';
 // Contexts
-import { ThemeProvider } from './contexts/Theme.context';
+import { ThemeProvider } from './contexts/theme.context';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
