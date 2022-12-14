@@ -4,5 +4,6 @@ export const lightTheme = {
     grayOne: '#f9f9f9',
     grayTwo: '#eee',
     grayThree: '#ddd',
+    grayFour: '#888',
   },
 };
