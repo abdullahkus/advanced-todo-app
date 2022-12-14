@@ -1,9 +1,18 @@
-import React from 'react'
+import React from 'react';
+// Styles
+import { BaseInput, InputGroup } from './Input.styles';
 
-const InputComp = () => {
+const InputComp = ({ name, labelText, ...otherProps }) => {
   return (
-    <div>InputComp</div>
-  )
-}
+    <InputGroup>
+      {labelText && <label htmlFor={name}>{labelText}</label>}
+      <BaseInput
+        name={name}
+        id={name}
+        {...otherProps}
+      />
+    </InputGroup>
+  );
+};
 
-export default InputComp
+export default InputComp;
