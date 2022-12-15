@@ -4,7 +4,7 @@ export const getAllTodo = () => http.get('/todos')
 
 export const getTodo = (todoId) => http.get(`/todos/${todoId}`)
 
-export const addTodo = (todo) => http.post('/todos/add', todo, {
+export const addTodo = (todo) => http.post('/todos/', todo, {
   headers: { 'Content-Type': 'application/json' },
 })
 
