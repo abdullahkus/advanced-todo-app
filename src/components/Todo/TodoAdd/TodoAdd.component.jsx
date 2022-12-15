@@ -18,9 +18,9 @@ const TodoAddComp = ({ fetchAddTodo }) => {
     const todo = {
       todo: formTodo,
       completed: false,
-      userId: 1,
     };
     fetchAddTodo(todo);
+    setFormTodo('');
   };
 
   const handleChange = (event) => {
@@ -35,6 +35,7 @@ const TodoAddComp = ({ fetchAddTodo }) => {
           as={InputComp}
           type='text'
           name='todo'
+          value={formTodo}
           onChange={handleChange}
         />
         <AddButton
