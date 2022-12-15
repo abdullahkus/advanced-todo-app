@@ -12,9 +12,9 @@ const TodoListComp = ({
   return (
     <TodoListContainer>
       <TodoList>
-        {todoList.map((todo) => (
+        {todoList.map((todo, index) => (
           <TodoListItem
-            key={todo.id}
+            key={index}
             todo={todo}
             fetchDeleteTodo={fetchDeleteTodo}
             changeTodo={changeTodo}

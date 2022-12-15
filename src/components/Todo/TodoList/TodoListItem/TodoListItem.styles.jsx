@@ -7,7 +7,7 @@ export const ListItem = styled.li`
   align-items: center;
 
   ${(props) =>
-    props.checked &&
+    props.completed &&
     css`
       background-color: ${(props) => props.theme.color.grayFour} !important;
       color: #fff;
@@ -16,12 +16,16 @@ export const ListItem = styled.li`
   .item {
     width: 100%;
     padding: 0 10px;
+    cursor: pointer;
+    height: 40px;
+    display: flex;
+    align-items: center;
 
     ${(props) =>
-      props.checked &&
+      props.completed &&
       css`
         text-decoration: line-through;
-      `}
+      `};
   }
 `;
 
@@ -32,7 +36,7 @@ export const DeleteButton = styled.div`
   justify-content: center;
   align-items: center;
   width: 5%;
-  padding: 10px;
+  height: 40px;
   cursor: pointer;
 
   :hover {
@@ -49,7 +53,11 @@ export const SaveButton = styled(DeleteButton)`
 `;
 
 export const Input = styled(BaseInput)`
-  background: transparent;
+  background: ${props => props.theme.color.grayOne};
   border: 0;
+  border-radius: 0;
   width: 100%;
+  padding: 0 10px;
+  height: 40px;
+  font-size: 16px;
 `;

@@ -17,12 +17,12 @@ const TodoComp = () => {
   useEffect(() => {
     const fetchAllTodo = async () => {
       const response = await getAllTodo();
-      setTodoList(response.data.todos);
+      setTodoList(response.data);
       return;
     };
 
     fetchAllTodo();
-  }, []);
+  }, [todoList]);
 
   const fetchDeleteTodo = async (todoId) => {
     const response = await deleteTodo(todoId);
@@ -40,14 +40,19 @@ const TodoComp = () => {
     return;
   };
 
-  const changeCompleted = (todoId) => {
+  const changeCompleted = async (todoId) => {
+    const findTodo = todoList.find((todo) => todo.id === todoId);
+    const changedTodo = {
+      ...findTodo,
+      completed: !findTodo.completed,
+    };
+    const response = await updateTodo(todoId, changedTodo);
+    if (!response) return;
+
     setTodoList((state) => {
       return state.map((todo) => {
         if (todo.id === todoId) {
-          return {
-            ...todo,
-            completed: !todo.completed,
-          };
+          return changedTodo;
         } else {
           return todo;
         }
@@ -55,25 +60,19 @@ const TodoComp = () => {
     });
   };
 
-  // const handleCompleted = async (todoId, todo) => {
-  //   const response = await updateTodo(todoId, todo);
-  //   if (!response) return;
-  //   const findTodoIndex = todoList.find((todo) => todo.id === todoId);
-  //   const updatedTodoList = todoList.map((todo) => {
-  //     if (todo.id === todoId) {
-  //       todo.completed = !todo.completed;
-  //     }
-  //   });
-  // };
+  const changeTodo = async (todoId, todoTitle) => {
+    const findTodo = todoList.find((todo) => todo.id === todoId);
+    const changedTodo = {
+      ...findTodo,
+      todo: todoTitle,
+    };
+    const response = await updateTodo(todoId, changedTodo);
+    if (!response) return;
 
-  const changeTodo = (todoId, todoTitle) => {
     setTodoList((state) => {
       return state.map((todo) => {
         if (todo.id === todoId) {
-          return {
-            ...todo,
-            todo: todoTitle,
-          };
+          return changedTodo;
         } else {
           return todo;
         }

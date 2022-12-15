@@ -38,7 +38,7 @@ const TodoListItemComp = ({
 
   return (
     <>
-      <ListItem checked={todo.completed}>
+      <ListItem completed={todo.completed}>
         {isEdit ? (
           <Input
             as={InputComp}
