@@ -22,7 +22,7 @@ const TodoComp = () => {
     };
 
     fetchAllTodo();
-  }, [todoList]);
+  }, []);
 
   const fetchDeleteTodo = async (todoId) => {
     const response = await deleteTodo(todoId);

@@ -11,17 +11,21 @@ const TodoListComp = ({
 }) => {
   return (
     <TodoListContainer>
-      <TodoList>
-        {todoList.map((todo, index) => (
-          <TodoListItem
-            key={index}
-            todo={todo}
-            fetchDeleteTodo={fetchDeleteTodo}
-            changeTodo={changeTodo}
-            changeCompleted={changeCompleted}
-          />
-        ))}
-      </TodoList>
+      {todoList.length > 0 ? (
+        <TodoList>
+          {todoList.map((todo, index) => (
+            <TodoListItem
+              key={index}
+              todo={todo}
+              fetchDeleteTodo={fetchDeleteTodo}
+              changeTodo={changeTodo}
+              changeCompleted={changeCompleted}
+            />
+          ))}
+        </TodoList>
+      ) : (
+        <p>There is nothing to do yet!</p>
+      )}
     </TodoListContainer>
   );
 };
