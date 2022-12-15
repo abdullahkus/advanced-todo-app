@@ -1,23 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 // Styles
 import {
   TodoAddContainer,
   TodoAddTitle,
   FormContainer,
   AddInput,
-  AddButton
+  AddButton,
 } from './TodoAdd.styles';
 // Components
 import InputComp from '../../../ui/Input/Input.component';
 import ButtonComp from '../../../ui/Button/Button.component';
 
-const TodoAddComp = () => {
+const TodoAddComp = ({ fetchAddTodo }) => {
+  const [formTodo, setFormTodo] = useState('');
+
+  const addTodoHandler = () => {
+    const todo = {
+      todo: formTodo,
+      completed: false,
+      userId: 1,
+    };
+    fetchAddTodo(todo);
+  };
+
+  const handleChange = (event) => {
+    setFormTodo(event.target.value);
+  };
+
   return (
     <TodoAddContainer>
       <TodoAddTitle>Todo</TodoAddTitle>
       <FormContainer>
-        <AddInput as={InputComp} />
-        <AddButton as={ButtonComp} >Add</AddButton>
+        <AddInput
+          as={InputComp}
+          type='text'
+          name='todo'
+          onChange={handleChange}
+        />
+        <AddButton
+          as={ButtonComp}
+          onClick={addTodoHandler}
+          disabled={formTodo.trim() === ''}>
+          Add
+        </AddButton>
       </FormContainer>
     </TodoAddContainer>
   );

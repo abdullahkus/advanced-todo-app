@@ -3,13 +3,24 @@ import React from 'react';
 import TodoListItem from './TodoListItem/TodoListItem.component';
 // Styles
 import { TodoListContainer, TodoList } from './TodoList.styles';
-const TodoListComp = () => {
+const TodoListComp = ({
+  todoList,
+  fetchDeleteTodo,
+  changeTodo,
+  changeCompleted,
+}) => {
   return (
     <TodoListContainer>
       <TodoList>
-        <TodoListItem></TodoListItem>
-        <TodoListItem></TodoListItem>
-        <TodoListItem></TodoListItem>
+        {todoList.map((todo) => (
+          <TodoListItem
+            key={todo.id}
+            todo={todo}
+            fetchDeleteTodo={fetchDeleteTodo}
+            changeTodo={changeTodo}
+            changeCompleted={changeCompleted}
+          />
+        ))}
       </TodoList>
     </TodoListContainer>
   );

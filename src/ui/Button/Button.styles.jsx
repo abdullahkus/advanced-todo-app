@@ -18,6 +18,10 @@ export const BaseButton = styled.button`
   :hover {
     filter: brightness(85%);
   }
+
+  :disabled {
+    filter: brightness(85%);
+  }
 `;
 
 export const InvertedButton = styled(BaseButton)`
