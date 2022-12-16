@@ -79,6 +79,6 @@ export const Input = styled(BaseInput)`
   width: 80% !important;
 
   ${breakpointDown.md`
-width: 100%;
-`}
+  width: 100% !important;
+  `}
 `;
