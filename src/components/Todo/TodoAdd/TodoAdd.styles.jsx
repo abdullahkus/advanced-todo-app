@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { BaseButton } from '../../../ui/Button/Button.styles';
 import { BaseInput } from '../../../ui/Input/Input.styles';
+import { breakpointDown } from '../../../styles/Query.styles';
 
 export const TodoAddContainer = styled.div`
   display: flex;
@@ -24,13 +25,20 @@ export const FormContainer = styled.div`
   display: flex;
   border: 3px solid ${(props) => props.theme.color.grayThree};
   border-radius: 5px;
-  width: 70%;
   overflow: hidden;
+  width: 70%;
+
+  ${breakpointDown.sm`
+    flex-direction: column;
+  `}
+
+  ${breakpointDown.md`
+    width: 100%;
+  `}
 `;
 
 export const AddInput = styled(BaseInput)`
   border: 0;
-  width: 100%;
   height: 100%;
   border-radius: 0;
 `;
@@ -41,4 +49,9 @@ export const AddButton = styled(BaseButton)`
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
   margin-right: 0;
+  width: 20%;
+
+  ${breakpointDown.sm`
+    width: 100%;
+  `}
 `;
