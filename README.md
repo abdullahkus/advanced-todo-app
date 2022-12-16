@@ -1,10 +1,8 @@
-# Advanced Todo App
-
-## [Check out the live example.](https://advanced-todo-cbk8y29ze-abdullahkus.vercel.app/)
-
 ## About API
 
 The API is a fake-API created using the json-server library, published over Render, and used for the development environment.
+
+## Screenshot
 
 ![](https://user-images.githubusercontent.com/70553662/207987351-7ff9ae7a-e8ab-4816-9059-b65dee5f735a.png)
 ![](https://user-images.githubusercontent.com/70553662/207987353-11a271f1-70c1-49ea-b771-7e9d93fa88f4.png)
