@@ -23,12 +23,12 @@ export const ListItem = styled.li`
     align-items: center;
     padding: 0 10px;
     height: 40px;
-    width: 80%;
     cursor: pointer;
+    width: 80%;
 
     ${breakpointDown.md`
     width: 100%;
-  `}
+    `}
 
     ${(props) =>
       props.completed &&
@@ -73,8 +73,12 @@ export const Input = styled(BaseInput)`
   background: ${(props) => props.theme.color.grayOne};
   border: 0;
   border-radius: 0;
-  width: 100%;
   padding: 0 10px;
   height: 40px;
   font-size: 16px;
+  width: 80% !important;
+
+  ${breakpointDown.md`
+width: 100%;
+`}
 `;
