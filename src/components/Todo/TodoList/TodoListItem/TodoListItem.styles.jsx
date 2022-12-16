@@ -1,10 +1,15 @@
 import styled, { css } from 'styled-components';
 import { BaseInput } from '../../../../ui/Input/Input.styles';
+import { breakpointDown } from '../../../../styles/Query.styles';
 
 export const ListItem = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  ${breakpointDown.md`
+    flex-direction: column;
+  `}
 
   ${(props) =>
     props.completed &&
@@ -14,18 +19,30 @@ export const ListItem = styled.li`
     `}
 
   .item {
-    width: 100%;
-    padding: 0 10px;
-    cursor: pointer;
-    height: 40px;
     display: flex;
     align-items: center;
+    padding: 0 10px;
+    height: 40px;
+    width: 80%;
+    cursor: pointer;
+
+    ${breakpointDown.md`
+    width: 100%;
+  `}
 
     ${(props) =>
       props.completed &&
       css`
         text-decoration: line-through;
       `};
+  }
+
+  .button-group {
+    display: flex;
+    width: 20%;
+    ${breakpointDown.md`
+    width: 100%;
+  `}
   }
 `;
 
@@ -35,9 +52,9 @@ export const DeleteButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 5%;
   height: 40px;
   cursor: pointer;
+  width: 100%;
 
   :hover {
     filter: brightness(85%);
@@ -53,7 +70,7 @@ export const SaveButton = styled(DeleteButton)`
 `;
 
 export const Input = styled(BaseInput)`
-  background: ${props => props.theme.color.grayOne};
+  background: ${(props) => props.theme.color.grayOne};
   border: 0;
   border-radius: 0;
   width: 100%;

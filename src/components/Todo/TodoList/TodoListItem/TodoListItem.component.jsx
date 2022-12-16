@@ -55,19 +55,19 @@ const TodoListItemComp = ({
           </p>
         )}
         {isEdit ? (
-          <>
+          <div className='button-group'>
             <DeleteButton onClick={changeCancel}>x</DeleteButton>
             <SaveButton onClick={() => saveHandler(todo.id, formTodo)}>
               Save
             </SaveButton>
-          </>
+          </div>
         ) : (
-          <>
+          <div className='button-group'>
             <EditButton onClick={() => setIsEdit(true)}>Edit</EditButton>
             <DeleteButton onClick={() => fetchDeleteTodo(todo.id)}>
               x
             </DeleteButton>
-          </>
+          </div>
         )}
       </ListItem>
     </>
