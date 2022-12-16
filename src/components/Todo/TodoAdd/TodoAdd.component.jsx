@@ -11,7 +11,7 @@ import {
 import InputComp from '../../../ui/Input/Input.component';
 import ButtonComp from '../../../ui/Button/Button.component';
 
-const TodoAddComp = ({ fetchAddTodo }) => {
+const TodoAddComp = React.memo(({ fetchAddTodo }) => {
   const [formTodo, setFormTodo] = useState('');
 
   const addTodoHandler = () => {
@@ -47,6 +47,6 @@ const TodoAddComp = ({ fetchAddTodo }) => {
       </FormContainer>
     </TodoAddContainer>
   );
-};
+});
 
 export default TodoAddComp;
