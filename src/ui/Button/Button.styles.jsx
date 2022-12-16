@@ -14,6 +14,7 @@ export const BaseButton = styled.button`
   font-weight: bolder;
   color: #fff;
   background: ${(props) => props.theme.color.primary};
+  width: 100%;
 
   :hover {
     filter: brightness(85%);
