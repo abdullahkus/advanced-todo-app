@@ -20,10 +20,14 @@ const TodoComp = React.memo(() => {
   const [selectedFilterType, setSelectedFilterType] = useState('all');
 
   useEffect(() => {
-    const fetchAllTodo = async () => {
-      const response = await getAllTodo();
-      setTodoList(response.data);
-      return;
+    const fetchAllTodo = () => {
+      getAllTodo()
+        .then((response) => {
+          setTodoList(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     };
 
     fetchAllTodo();
@@ -33,7 +37,6 @@ const TodoComp = React.memo(() => {
     const getTodoListLength = () => {
       const listLength = filteredTodoList.length;
       setTodoListLength(listLength);
-      return;
     };
 
     getTodoListLength();
@@ -63,63 +66,69 @@ const TodoComp = React.memo(() => {
 
   const changeFilterType = (filterType) => {
     setSelectedFilterType(filterType);
-    return;
   };
 
-  const fetchDeleteTodo = async (todoId) => {
-    const response = await deleteTodo(todoId);
-    if (!response) return;
-    const filteredTodoList = todoList.filter((todo) => todo.id !== todoId);
-    setTodoList(filteredTodoList);
-    return;
+  const fetchDeleteTodo = (todoId) => {
+    deleteTodo(todoId)
+      .then((response) => {
+        const filteredTodoList = todoList.filter((todo) => todo.id !== todoId);
+        setTodoList(filteredTodoList);
+      })
+      .catch((error) => console.error(error));
   };
 
-  const fetchAddTodo = async (todo) => {
-    const response = await addTodo(todo);
-    const addedTodo = response.data;
-    if (!addedTodo) return;
-    setTodoList((prevArray) => [...prevArray, response.data]);
-    return;
+  const fetchAddTodo = (todo) => {
+    addTodo(todo)
+      .then((response) => {
+        setTodoList((prevArray) => [...prevArray, response.data]);
+      })
+      .catch((error) => console.error(error));
   };
 
   const changeCompleted = async (todoId) => {
     const findTodo = todoList.find((todo) => todo.id === todoId);
+    if (!findTodo) return;
+
     const changedTodo = {
       ...findTodo,
       completed: !findTodo.completed,
     };
-    const response = await updateTodo(todoId, changedTodo);
-    if (!response) return;
 
-    setTodoList((state) => {
-      return state.map((todo) => {
-        if (todo.id === todoId) {
-          return changedTodo;
-        } else {
-          return todo;
-        }
-      });
-    });
+    updateTodo(todoId, changedTodo)
+      .then((response) => {
+        setTodoList((state) => {
+          return state.map((todo) => {
+            if (todo.id === todoId) {
+              return response.data;
+            }
+          });
+        });
+      })
+      .catch((error) => console.error(error));
   };
 
   const changeTodo = async (todoId, todoTitle) => {
     const findTodo = todoList.find((todo) => todo.id === todoId);
+    if (!findTodo) return;
+
     const changedTodo = {
       ...findTodo,
       todo: todoTitle,
     };
-    const response = await updateTodo(todoId, changedTodo);
-    if (!response) return;
 
-    setTodoList((state) => {
-      return state.map((todo) => {
-        if (todo.id === todoId) {
-          return changedTodo;
-        } else {
-          return todo;
-        }
-      });
-    });
+    updateTodo(todoId, changedTodo)
+      .then((response) => {
+        setTodoList((state) => {
+          return state.map((todo) => {
+            if (todo.id === todoId) {
+              return response.data;
+            } else {
+              return todo;
+            }
+          });
+        });
+      })
+      .catch((error) => console.error(error));
   };
 
   return (
