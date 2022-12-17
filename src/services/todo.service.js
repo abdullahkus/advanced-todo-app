@@ -1,4 +1,4 @@
-import http from '../utils/http/http'
+import http from '../utils/http'
 
 export const getAllTodo = () => http.get('/todos')
 
