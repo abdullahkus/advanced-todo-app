@@ -16,7 +16,7 @@ import {
 const TodoComp = React.memo(() => {
   const [todoList, setTodoList] = useState([]);
   const [todoListLength, setTodoListLength] = useState(0);
-  const [filteredTodoList, setFilteredTodolist] = useState([]);
+  const [filteredTodoList, setFilteredTodoList] = useState([]);
   const [selectedFilterType, setSelectedFilterType] = useState('all');
 
   useEffect(() => {
@@ -42,19 +42,19 @@ const TodoComp = React.memo(() => {
   useEffect(() => {
     const filterList = () => {
       if (selectedFilterType === 'all') {
-        setFilteredTodolist(todoList);
+        setFilteredTodoList(todoList);
       }
 
       if (selectedFilterType === 'active') {
         const filteredList = todoList.filter(
           (todo) => todo.completed === false,
         );
-        setFilteredTodolist(filteredList);
+        setFilteredTodoList(filteredList);
       }
 
       if (selectedFilterType === 'completed') {
         const filteredList = todoList.filter((todo) => todo.completed === true);
-        setFilteredTodolist(filteredList);
+        setFilteredTodoList(filteredList);
       }
     };
 
