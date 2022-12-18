@@ -108,6 +108,8 @@ const TodoComp = React.memo(() => {
           return state.map((todo) => {
             if (todo.id === todoId) {
               return response.data;
+            } else {
+              return todo;
             }
           });
         });
