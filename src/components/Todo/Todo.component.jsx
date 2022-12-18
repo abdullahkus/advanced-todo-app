@@ -13,11 +13,19 @@ import {
   addTodo,
 } from '../../services/todo.service';
 
+export const FILTER_TYPE_CLASSES = {
+  all: 'all',
+  active: 'active',
+  completed: 'completed',
+};
+
 const TodoComp = React.memo(() => {
   const [todoList, setTodoList] = useState([]);
   const [todoListLength, setTodoListLength] = useState(0);
   const [filteredTodoList, setFilteredTodoList] = useState([]);
-  const [selectedFilterType, setSelectedFilterType] = useState('all');
+  const [selectedFilterType, setSelectedFilterType] = useState(
+    FILTER_TYPE_CLASSES.all,
+  );
 
   useEffect(() => {
     const fetchAllTodo = () => {
@@ -44,18 +52,18 @@ const TodoComp = React.memo(() => {
 
   useEffect(() => {
     const filterList = () => {
-      if (selectedFilterType === 'all') {
+      if (selectedFilterType === FILTER_TYPE_CLASSES.all) {
         setFilteredTodoList(todoList);
       }
 
-      if (selectedFilterType === 'active') {
+      if (selectedFilterType === FILTER_TYPE_CLASSES.active) {
         const filteredList = todoList.filter(
           (todo) => todo.completed === false,
         );
         setFilteredTodoList(filteredList);
       }
 
-      if (selectedFilterType === 'completed') {
+      if (selectedFilterType === FILTER_TYPE_CLASSES.completed) {
         const filteredList = todoList.filter((todo) => todo.completed === true);
         setFilteredTodoList(filteredList);
       }

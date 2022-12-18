@@ -3,6 +3,8 @@ import React from 'react';
 import { InformationContainer } from './TodoInformation.styles';
 // Components
 import ButtonComp from '../../../ui/Button/Button.component';
+// Filter Type
+import { FILTER_TYPE_CLASSES } from '../Todo.component';
 
 const TodoInformationComp = ({ todoListLength, changeFilterType }) => {
   const changeFilterTypeHandler = (filterType) => {
@@ -16,17 +18,19 @@ const TodoInformationComp = ({ todoListLength, changeFilterType }) => {
       <div className='button-group'>
         <ButtonComp
           buttonType='inverted'
-          onClick={() => changeFilterTypeHandler('all')}>
+          onClick={() => changeFilterTypeHandler(FILTER_TYPE_CLASSES.all)}>
           All
         </ButtonComp>
         <ButtonComp
           buttonType='inverted'
-          onClick={() => changeFilterTypeHandler('active')}>
+          onClick={() => changeFilterTypeHandler(FILTER_TYPE_CLASSES.active)}>
           Active
         </ButtonComp>
         <ButtonComp
           buttonType='inverted'
-          onClick={() => changeFilterTypeHandler('completed')}>
+          onClick={() =>
+            changeFilterTypeHandler(FILTER_TYPE_CLASSES.completed)
+          }>
           Completed
         </ButtonComp>
       </div>
