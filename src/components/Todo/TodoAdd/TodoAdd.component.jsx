@@ -9,7 +9,9 @@ import {
 } from './TodoAdd.styles';
 // Components
 import InputComp from '../../../ui/Input/Input.component';
-import ButtonComp from '../../../ui/Button/Button.component';
+import ButtonComp, {
+  BUTTON_TYPE_CLASSES,
+} from '../../../ui/Button/Button.component';
 
 const TodoAddComp = React.memo(({ fetchAddTodo }) => {
   const [formTodo, setFormTodo] = useState('');
@@ -41,6 +43,7 @@ const TodoAddComp = React.memo(({ fetchAddTodo }) => {
         <AddButton
           as={ButtonComp}
           onClick={addTodoHandler}
+          buttonType={BUTTON_TYPE_CLASSES.base}
           disabled={formTodo.trim() === ''}>
           Add
         </AddButton>

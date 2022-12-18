@@ -2,10 +2,15 @@ import React from 'react';
 // Styles
 import { BaseButton, InvertedButton } from './Button.styles';
 
-const getButton = (buttonType = 'base') =>
+export const BUTTON_TYPE_CLASSES = {
+  base: 'base',
+  inverted: 'inverted',
+};
+
+const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) =>
   ({
-    base: BaseButton,
-    inverted: InvertedButton,
+    [BUTTON_TYPE_CLASSES.base]: BaseButton,
+    [BUTTON_TYPE_CLASSES.inverted]: InvertedButton,
   }[buttonType]);
 
 const ButtonComp = ({ children, buttonType, ...otherProps }) => {
