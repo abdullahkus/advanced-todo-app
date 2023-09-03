@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  api:
+    build: ./api
+    container_name: api
+    ports: 
+      - '3010:3010'
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+  client:
+    build: ./client
+    container_name: todo-app
+    ports:
+      - '3000:3000'
+    stdin_open: true
+    tty: true
