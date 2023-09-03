@@ -1,0 +1,4 @@
+{
+  "/company/private/:id": "/company-private/:id",
+  "/company/corporate/:id": "/company-corporate/:id"
+}

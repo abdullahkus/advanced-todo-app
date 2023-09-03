@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "json-server": "^0.17.3",
+    "nodemon": "^2.0.22"
+  },
+  "name": "json-backend",
+  "version": "1.0.0",
+  "main": "runner.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
