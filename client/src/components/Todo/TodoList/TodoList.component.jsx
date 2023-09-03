@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from "react";
 // Components
-import TodoListItem from './TodoListItem/TodoListItem.component';
+import TodoListItem from "./TodoListItem/TodoListItem.component";
 // Styles
-import { TodoListContainer, TodoList } from './TodoList.styles';
+import { TodoListContainer, TodoList } from "./TodoList.styles";
 
 const TodoListComp = ({
   todoList,
