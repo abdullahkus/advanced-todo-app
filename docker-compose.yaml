@@ -15,3 +15,6 @@ services:
       - '3000:3000'
     stdin_open: true
     tty: true
+    volumes:
+      - ./client:/app
+    restart: always
