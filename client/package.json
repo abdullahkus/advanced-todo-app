@@ -15,7 +15,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "npx env-cmd -f config/dev.env react-scripts start",
+    "start": "npx env-cmd -f config/prod.env react-scripts start",
     "build": "npx env-cmd -f config/prod.env react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
