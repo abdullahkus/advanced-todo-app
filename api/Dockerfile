@@ -11,4 +11,4 @@ COPY . .
 EXPOSE 3010
 # required for docker desktop port mapping
 
-CMD ["npm", "build"]
+CMD ["npm", "start"]
