@@ -8,7 +8,11 @@ import ButtonComp, {
 // Filter Type
 import { FILTER_TYPE_CLASSES } from "../Todo.component";
 
-const TodoInformationComp = ({ todoListLength, changeFilterType }) => {
+const TodoInformationComp = ({
+  todoListLength,
+  changeFilterType,
+  selectedFilterType,
+}) => {
   const changeFilterTypeHandler = useCallback(
     (filterType) => {
       changeFilterType(filterType);

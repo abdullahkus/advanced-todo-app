@@ -12,7 +12,7 @@ const TodoListComp = ({
 }) => {
   return (
     <TodoListContainer>
-      {todoList.length > 0 ? (
+      {todoList?.length > 0 ? (
         <TodoList>
           {todoList.map((todo, index) => (
             <TodoListItem

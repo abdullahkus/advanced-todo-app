@@ -1,15 +1,14 @@
-import http from '../utils/http'
+import http from "../utils/http";
 
-export const getAllTodo = () => http.get('/todos')
+export const getAllTodo = (options) => http.get("/todos", options);
 
-export const getTodo = (todoId) => http.get(`/todos/${todoId}`)
+export const getTodo = (todoId, options) =>
+  http.get(`/todos/${todoId}`, options);
 
-export const addTodo = (todo) => http.post('/todos/', todo, {
-  headers: { 'Content-Type': 'application/json' },
-})
+export const addTodo = (todo, options) => http.post("/todos/", todo, options);
 
-export const updateTodo = (todoId, todo) => http.put(`/todos/${todoId}`, todo, {
-  headers: { 'Content-Type': 'application/json' },
-})
+export const updateTodo = (todoId, todo, options) =>
+  http.put(`/todos/${todoId}`, todo, options);
 
-export const deleteTodo = (todoId) => http.delete(`/todos/${todoId}`)
+export const deleteTodo = (todoId, options) =>
+  http.delete(`/todos/${todoId}`, options);

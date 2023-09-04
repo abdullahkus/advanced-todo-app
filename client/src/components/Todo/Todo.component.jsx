@@ -1,76 +1,81 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from "react";
 // Styles
-import { TodoContainer } from './Todo.styles';
+import { TodoContainer } from "./Todo.styles";
 // Components
-import TodoAddComp from './TodoAdd/TodoAdd.component';
-import TodoListComp from './TodoList/TodoList.component';
-import TodoInformationComp from './TodoInformation/TodoInformation.component';
+import TodoAddComp from "./TodoAdd/TodoAdd.component";
+import TodoListComp from "./TodoList/TodoList.component";
+import TodoInformationComp from "./TodoInformation/TodoInformation.component";
 // Services
 import {
   getAllTodo,
   deleteTodo,
   updateTodo,
   addTodo,
-} from '../../services/todo.service';
+} from "../../services/todo.service";
 
 export const FILTER_TYPE_CLASSES = {
-  all: 'all',
-  active: 'active',
-  completed: 'completed',
+  all: "all",
+  active: "active",
+  completed: "completed",
 };
 
-const TodoComp = React.memo(() => {
+const TodoComp = () => {
   const [todoList, setTodoList] = useState([]);
-  const [todoListLength, setTodoListLength] = useState(0);
   const [filteredTodoList, setFilteredTodoList] = useState([]);
   const [selectedFilterType, setSelectedFilterType] = useState(
-    FILTER_TYPE_CLASSES.all,
+    FILTER_TYPE_CLASSES.all
   );
 
   useEffect(() => {
-    const fetchAllTodo = () => {
-      getAllTodo()
-        .then((response) => {
-          setTodoList(response.data);
-        })
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    const fetchAllTodo = async () => {
+      const fetchAllData = await getAllTodo({ signal })
+        .then((response) => response.data)
         .catch((error) => {
           console.error(error);
         });
+
+      if (!signal.aborted) setTodoList(fetchAllData);
     };
 
     fetchAllTodo();
+
+    return () => controller.abort();
   }, []);
 
   useEffect(() => {
-    const getTodoListLength = () => {
-      const listLength = filteredTodoList.length;
-      setTodoListLength(listLength);
-    };
+    const controller = new AbortController();
+    const signal = controller.signal;
 
-    getTodoListLength();
-  }, [filteredTodoList]);
-
-  useEffect(() => {
     const filterList = () => {
       if (selectedFilterType === FILTER_TYPE_CLASSES.all) {
-        setFilteredTodoList(todoList);
+        if (!signal.aborted) setFilteredTodoList(todoList);
       }
 
       if (selectedFilterType === FILTER_TYPE_CLASSES.active) {
         const filteredList = todoList.filter(
-          (todo) => todo.completed === false,
+          (todo) => todo.completed === false
         );
-        setFilteredTodoList(filteredList);
+        if (!signal.aborted) setFilteredTodoList(filteredList);
       }
 
       if (selectedFilterType === FILTER_TYPE_CLASSES.completed) {
         const filteredList = todoList.filter((todo) => todo.completed === true);
-        setFilteredTodoList(filteredList);
+        if (!signal.aborted) setFilteredTodoList(filteredList);
       }
     };
 
     filterList();
+
+    return () => controller.abort();
   }, [selectedFilterType, todoList]);
+
+  const todoListLength = useMemo(
+    () => filteredTodoList.length,
+    [filteredTodoList]
+  );
 
   const changeFilterType = (filterType) => {
     setSelectedFilterType(filterType);
@@ -78,7 +83,7 @@ const TodoComp = React.memo(() => {
 
   const fetchDeleteTodo = (todoId) => {
     deleteTodo(todoId)
-      .then((response) => {
+      .then(() => {
         const filteredTodoList = todoList.filter((todo) => todo.id !== todoId);
         setTodoList(filteredTodoList);
       })
@@ -142,7 +147,7 @@ const TodoComp = React.memo(() => {
   };
 
   return (
-    <TodoContainer className='container'>
+    <TodoContainer className="container">
       <TodoAddComp fetchAddTodo={fetchAddTodo} />
       <TodoListComp
         todoList={filteredTodoList}
@@ -154,9 +159,10 @@ const TodoComp = React.memo(() => {
       <TodoInformationComp
         todoListLength={todoListLength}
         changeFilterType={changeFilterType}
+        selectedFilterType={selectedFilterType}
       />
     </TodoContainer>
   );
-});
+};
 
 export default TodoComp;
