@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const BaseButton = styled.button`
   display: flex;
@@ -12,7 +12,7 @@ export const BaseButton = styled.button`
   font-size: 15px;
   text-transform: uppercase;
   font-weight: bolder;
-  color: #fff;
+  color: ${(props) => props.theme.textColor.primary};
   background: ${(props) => props.theme.color.primary};
   width: 100%;
 
@@ -27,5 +27,5 @@ export const BaseButton = styled.button`
 
 export const InvertedButton = styled(BaseButton)`
   background: none;
-  color: #000;
+  color: ${(props) => props.theme.textColor.primary};
 `;

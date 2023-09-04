@@ -73,7 +73,7 @@ const TodoComp = () => {
   }, [selectedFilterType, todoList]);
 
   const todoListLength = useMemo(
-    () => filteredTodoList.length,
+    () => filteredTodoList?.length,
     [filteredTodoList]
   );
 

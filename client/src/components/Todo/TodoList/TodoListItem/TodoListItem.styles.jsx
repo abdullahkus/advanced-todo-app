@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
-import { BaseInput } from '../../../../ui/Input/Input.styles';
-import { breakpointDown } from '../../../../styles/Query.styles';
+import styled, { css } from "styled-components";
+import { BaseInput } from "../../../../ui/Input/Input.styles";
+import { breakpointDown } from "../../../../styles/Query.styles";
 
 export const ListItem = styled.li`
   display: flex;
@@ -25,15 +25,15 @@ export const ListItem = styled.li`
     height: 40px;
     cursor: pointer;
     width: 80%;
+    color: ${(props) => props.theme.textColor.primary};
 
     ${breakpointDown.md`
     width: 100%;
-    `}
-
-    ${(props) =>
+    `} ${(props) =>
       props.completed &&
       css`
         text-decoration: line-through;
+        color: #fff;
       `};
   }
 
@@ -71,6 +71,7 @@ export const SaveButton = styled(DeleteButton)`
 
 export const Input = styled(BaseInput)`
   background: ${(props) => props.theme.color.grayOne};
+  color: ${(props) => props.theme.textColor.primary};
   border: 0;
   border-radius: 0;
   padding: 0 10px;

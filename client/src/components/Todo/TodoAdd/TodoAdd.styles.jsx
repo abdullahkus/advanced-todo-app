@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { BaseButton } from '../../../ui/Button/Button.styles';
-import { BaseInput } from '../../../ui/Input/Input.styles';
-import { breakpointDown } from '../../../styles/Query.styles';
+import styled, { keyframes, css } from "styled-components";
+import { BaseButton } from "../../../ui/Button/Button.styles";
+import { BaseInput } from "../../../ui/Input/Input.styles";
+import { breakpointDown } from "../../../styles/Query.styles";
 
 export const TodoAddContainer = styled.div`
   display: flex;
@@ -13,12 +13,35 @@ export const TodoAddContainer = styled.div`
   background: ${(props) => props.theme.color.primary};
 `;
 
+const shake = keyframes`
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+`;
+
 export const TodoAddTitle = styled.h1`
   font-size: 27px;
   text-transform: uppercase;
   letter-spacing: 5px;
   font-weight: bolder;
-  color: #fff;
+  cursor: pointer;
+  color: ${(props) => props.theme.textColor.white};
+  animation: ${shake} 5s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
 `;
 
 export const FormContainer = styled.div`
@@ -51,6 +74,8 @@ export const AddButton = styled(BaseButton)`
   border-top-right-radius: 0;
   margin-right: 0;
   width: 20%;
+  background-color: ${(props) => props.theme.color.primary};
+  color: ${(props) => props.theme.textColor.white};
 
   ${breakpointDown.sm`
     width: 100%;

@@ -1,9 +1,9 @@
-import { createContext, useState } from 'react';
+import { createContext, useState } from "react";
 // Third Party
-import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import { ThemeProvider as StyledThemeProvider } from "styled-components";
 // Styles
-import { lightTheme } from '../styles/themes/LightTheme.styles';
-import { darkTheme } from '../styles/themes/DarkTheme.styles';
+import { lightTheme } from "../styles/themes/LightTheme.styles";
+import { darkTheme } from "../styles/themes/DarkTheme.styles";
 
 export const ThemeContext = createContext({
   currentTheme: lightTheme,

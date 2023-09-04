@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { breakpointDown } from '../../../styles/Query.styles';
+import styled from "styled-components";
+import { breakpointDown } from "../../../styles/Query.styles";
 
 export const InformationContainer = styled.div`
   display: flex;
@@ -12,6 +12,10 @@ export const InformationContainer = styled.div`
   ${breakpointDown.sm`
     flex-direction: column
   `}
+
+  .list-length {
+    color: ${(props) => props.theme.textColor.primary};
+  }
 
   .button-group {
     display: flex;

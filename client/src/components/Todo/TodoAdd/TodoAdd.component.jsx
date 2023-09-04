@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from "react";
 // Styles
 import {
   TodoAddContainer,
@@ -6,15 +6,18 @@ import {
   FormContainer,
   AddInput,
   AddButton,
-} from './TodoAdd.styles';
+  ThemeMode,
+} from "./TodoAdd.styles";
 // Components
-import InputComp from '../../../ui/Input/Input.component';
+import InputComp from "../../../ui/Input/Input.component";
 import ButtonComp, {
   BUTTON_TYPE_CLASSES,
-} from '../../../ui/Button/Button.component';
+} from "../../../ui/Button/Button.component";
+import { ThemeContext } from "../../../contexts/theme.context";
 
 const TodoAddComp = React.memo(({ fetchAddTodo }) => {
-  const [formTodo, setFormTodo] = useState('');
+  const { changeCurrentTheme } = useContext(ThemeContext);
+  const [formTodo, setFormTodo] = useState("");
 
   const addTodoHandler = () => {
     const todo = {
@@ -22,21 +25,25 @@ const TodoAddComp = React.memo(({ fetchAddTodo }) => {
       completed: false,
     };
     fetchAddTodo(todo);
-    setFormTodo('');
+    setFormTodo("");
   };
 
   const handleChange = (event) => {
     setFormTodo(event.target.value);
   };
 
+  const changeTheme = () => {
+    changeCurrentTheme();
+  };
+
   return (
     <TodoAddContainer>
-      <TodoAddTitle>Todo</TodoAddTitle>
+      <TodoAddTitle onClick={changeTheme}>Todo</TodoAddTitle>
       <FormContainer>
         <AddInput
           as={InputComp}
-          type='text'
-          name='todo'
+          type="text"
+          name="todo"
           value={formTodo}
           onChange={handleChange}
         />
@@ -44,7 +51,8 @@ const TodoAddComp = React.memo(({ fetchAddTodo }) => {
           as={ButtonComp}
           onClick={addTodoHandler}
           buttonType={BUTTON_TYPE_CLASSES.base}
-          disabled={formTodo.trim() === ''}>
+          disabled={formTodo.trim() === ""}
+        >
           Add
         </AddButton>
       </FormContainer>

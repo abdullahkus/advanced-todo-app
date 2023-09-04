@@ -23,7 +23,7 @@ const TodoInformationComp = ({
 
   return (
     <InformationContainer>
-      <p>{todoListLength} items left</p>
+      <p className="list-length">{todoListLength} items left</p>
       <div className="button-group">
         <ButtonComp
           buttonType={BUTTON_TYPE_CLASSES.inverted}
