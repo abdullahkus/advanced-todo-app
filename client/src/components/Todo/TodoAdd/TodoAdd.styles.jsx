@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { BaseButton } from "../../../ui/Button/Button.styles";
 import { BaseInput } from "../../../ui/Input/Input.styles";
 import { breakpointDown } from "../../../styles/Query.styles";

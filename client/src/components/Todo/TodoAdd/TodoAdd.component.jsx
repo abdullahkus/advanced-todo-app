@@ -6,7 +6,6 @@ import {
   FormContainer,
   AddInput,
   AddButton,
-  ThemeMode,
 } from "./TodoAdd.styles";
 // Components
 import InputComp from "../../../ui/Input/Input.component";
@@ -46,6 +45,7 @@ const TodoAddComp = React.memo(({ fetchAddTodo }) => {
           name="todo"
           value={formTodo}
           onChange={handleChange}
+          placeholder="Add a new todo"
         />
         <AddButton
           as={ButtonComp}

@@ -26,124 +26,94 @@ const TodoComp = () => {
     FILTER_TYPE_CLASSES.all
   );
 
+  const fetchTodos = async (signal) => {
+    try {
+      const response = await getAllTodo({ signal });
+      if (!signal.aborted) {
+        setTodoList(response.data);
+      }
+    } catch (error) {
+      if (error.name !== "CanceledError") {
+        console.error(error);
+      }
+    }
+  };
+
   useEffect(() => {
     const controller = new AbortController();
-    const signal = controller.signal;
-
-    const fetchAllTodo = async () => {
-      const fetchAllData = await getAllTodo({ signal })
-        .then((response) => response.data)
-        .catch((error) => {
-          console.error(error);
-        });
-
-      if (!signal.aborted) setTodoList(fetchAllData);
-    };
-
-    fetchAllTodo();
-
+    fetchTodos(controller.signal);
     return () => controller.abort();
   }, []);
 
   useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-
     const filterList = () => {
-      if (selectedFilterType === FILTER_TYPE_CLASSES.all) {
-        if (!signal.aborted) setFilteredTodoList(todoList);
-      }
-
-      if (selectedFilterType === FILTER_TYPE_CLASSES.active) {
-        const filteredList = todoList.filter(
-          (todo) => todo.completed === false
-        );
-        if (!signal.aborted) setFilteredTodoList(filteredList);
-      }
-
-      if (selectedFilterType === FILTER_TYPE_CLASSES.completed) {
-        const filteredList = todoList.filter((todo) => todo.completed === true);
-        if (!signal.aborted) setFilteredTodoList(filteredList);
+      switch (selectedFilterType) {
+        case FILTER_TYPE_CLASSES.active:
+          setFilteredTodoList(todoList.filter((todo) => !todo.completed));
+          break;
+        case FILTER_TYPE_CLASSES.completed:
+          setFilteredTodoList(todoList.filter((todo) => todo.completed));
+          break;
+        default:
+          setFilteredTodoList(todoList);
       }
     };
-
     filterList();
-
-    return () => controller.abort();
   }, [selectedFilterType, todoList]);
 
   const todoListLength = useMemo(
-    () => filteredTodoList?.length,
+    () => filteredTodoList.length,
     [filteredTodoList]
   );
 
-  const changeFilterType = (filterType) => {
-    setSelectedFilterType(filterType);
+  const changeFilterType = (filterType) => setSelectedFilterType(filterType);
+
+  const fetchDeleteTodo = async (todoId) => {
+    try {
+      await deleteTodo(todoId);
+      setTodoList(todoList.filter((todo) => todo.id !== todoId));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const fetchDeleteTodo = (todoId) => {
-    deleteTodo(todoId)
-      .then(() => {
-        const filteredTodoList = todoList.filter((todo) => todo.id !== todoId);
-        setTodoList(filteredTodoList);
-      })
-      .catch((error) => console.error(error));
-  };
-
-  const fetchAddTodo = (todo) => {
-    addTodo(todo)
-      .then((response) => {
-        setTodoList((prevArray) => [...prevArray, response.data]);
-      })
-      .catch((error) => console.error(error));
+  const fetchAddTodo = async (todo) => {
+    try {
+      const response = await addTodo(todo);
+      setTodoList((prevArray) => [...prevArray, response.data]);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const changeCompleted = async (todoId) => {
     const findTodo = todoList.find((todo) => todo.id === todoId);
     if (!findTodo) return;
 
-    const changedTodo = {
-      ...findTodo,
-      completed: !findTodo.completed,
-    };
-
-    updateTodo(todoId, changedTodo)
-      .then((response) => {
-        setTodoList((state) => {
-          return state.map((todo) => {
-            if (todo.id === todoId) {
-              return response.data;
-            } else {
-              return todo;
-            }
-          });
-        });
-      })
-      .catch((error) => console.error(error));
+    try {
+      const changedTodo = { ...findTodo, completed: !findTodo.completed };
+      const response = await updateTodo(todoId, changedTodo);
+      setTodoList((state) =>
+        state.map((todo) => (todo.id === todoId ? response.data : todo))
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const changeTodo = async (todoId, todoTitle) => {
     const findTodo = todoList.find((todo) => todo.id === todoId);
     if (!findTodo) return;
 
-    const changedTodo = {
-      ...findTodo,
-      todo: todoTitle,
-    };
-
-    updateTodo(todoId, changedTodo)
-      .then((response) => {
-        setTodoList((state) => {
-          return state.map((todo) => {
-            if (todo.id === todoId) {
-              return response.data;
-            } else {
-              return todo;
-            }
-          });
-        });
-      })
-      .catch((error) => console.error(error));
+    try {
+      const changedTodo = { ...findTodo, todo: todoTitle };
+      const response = await updateTodo(todoId, changedTodo);
+      setTodoList((state) =>
+        state.map((todo) => (todo.id === todoId ? response.data : todo))
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
